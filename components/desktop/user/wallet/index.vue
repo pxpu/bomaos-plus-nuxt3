@@ -96,20 +96,25 @@ useHead({
         <n-tabs
             type="line"
             size="large"
-            tab-style=""
             :bar-width="20"
             :tabs-padding="20"
             animated
             :pane-style="{ padding: '20px', width: 'auto' }"
         >
           <template #suffix>
-            <n-button size="tiny" :style="{marginRight: '20px'}" @click="onRecharge">充值余额</n-button>
+            <a-button
+                type="default"
+                :style="{ marginRight: '20px', backgroundColor: '#e6f7ff', borderColor: '#91d5ff', color: '#1890ff' }"
+                @click="onRecharge"
+            >
+              充值余额
+            </a-button>
           </template>
           <n-tab-pane name="消费记录">
-            <desktop-user-wallet-recharge-expenses/>
+            <desktop-user-wallet-recharge-expenses />
           </n-tab-pane>
           <n-tab-pane name="充值记录">
-            <desktop-user-wallet-recharge-record/>
+            <desktop-user-wallet-recharge-record />
           </n-tab-pane>
         </n-tabs>
       </n-card>

@@ -1,13 +1,14 @@
 import type {WithdrawRecord, WithdrawRecordParam} from "./model";
 import {hash} from "ohash";
 import request from "~/composables/request";
+import fetchRequest from "~/composables/fetchRequest";
 import type {PageResult} from "~/api";
 
 /**
  * 分页查询订单
  */
 export async function pageWithdrawRecords(params: WithdrawRecordParam) {
-    const res = await request.get<PageResult<WithdrawRecord>>('/member/withdraw-record/page', { ...params }, {server: false});
+    const res = await fetchRequest.get<PageResult<WithdrawRecord>>('/member/withdraw-record/page', { ...params }, {server: false});
     if (res.code === 0 && res.data) {
         return res.data;
     }

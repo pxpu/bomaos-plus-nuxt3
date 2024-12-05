@@ -172,7 +172,7 @@ const onSubmit = () => {
       <n-form-item label="支付方式" path="paymentType">
         <n-row :gutter="[10, 10]">
           <n-col
-              :span="6"
+              :span="8"
               v-for="payment in paymentList"
               :key="payment.id"
           >

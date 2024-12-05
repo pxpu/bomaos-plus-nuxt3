@@ -63,7 +63,7 @@ const onPrompt = (value?: number) => {
             height="50"
             object-fit="cover"
             :src="data.coverImage"
-            style="border-radius: 3px; background-color: rgba(0, 0, 0, 0.05);"
+            style="border-radius: 3px;"
         />
         <div class="title">
           <p class="g-name">
@@ -73,6 +73,11 @@ const onPrompt = (value?: number) => {
               </n-ellipsis>
             </nuxt-link>
           </p>
+          <div class="number" style="margin-top: 5px">
+            <n-space :size="0" style="align-items: flex-end;">
+              数量: x{{ data.number }} <span v-if="data.categoryName">, {{ data.categoryName }}</span>
+            </n-space>
+          </div>
           <div class="van-cell__label" style="margin-top: 5px">
             <n-space :size="0" style="align-items: flex-end;">
               <div class="action">
@@ -168,6 +173,12 @@ const onPrompt = (value?: number) => {
     .g-name {
       font-size: 15px;
       line-height: 1.2;
+      font-weight: 400;
+    }
+
+    .number {
+      font-size: 13px;
+      color: #707070;
       font-weight: 400;
     }
 

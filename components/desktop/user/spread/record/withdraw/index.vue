@@ -1,141 +1,129 @@
 <template>
-  <n-data-table
-      :remote="true"
-      size="large"
-      ref="table"
-      :columns="createColumns()"
-      :data="createData"
-      :loading="loadingRef"
-      :pagination="paginationReactive"
-      @update:page="handlePageChange"
+  <a-table
+      :columns="columns"
+      :data-source="dataSource"
+      :loading="loading"
+      :pagination="pagination"
+      :bordered="true"
+      @change="handleTableChange"
+      row-key="id"
   />
 </template>
 
 <script setup lang="ts">
-import {reactive, ref} from "vue";
-import {type DataTableColumns, NTag} from "naive-ui";
-import type {WithdrawRecord, WithdrawRecordParam} from "@/api/member/withdraw-record/model";
-import {pageWithdrawRecords} from "@/api/member/withdraw-record";
+import { reactive, ref, onMounted } from "vue";
+import { message } from "ant-design-vue";
+import type { WithdrawRecord, WithdrawRecordParam } from "@/api/member/withdraw-record/model";
+import { pageWithdrawRecords } from "@/api/member/withdraw-record";
 
 /**
- * 支出记录 Columns
+ * 表格列配置
  */
-const createColumns = (): DataTableColumns<WithdrawRecord> => {
-  return [
-    {
-      title: '提现类型',
-      key: 'withdrawType',
-      width: 80
+const columns = [
+  {
+    title: "提现类型",
+    dataIndex: "withdrawType",
+    key: "withdrawType",
+    width: 100,
+  },
+  {
+    title: "账户",
+    dataIndex: "account",
+    key: "account",
+    width: 120,
+    ellipsis: true,
+    scopedSlots: { customRender: "account" },
+  },
+  {
+    title: "金额",
+    dataIndex: "money",
+    key: "money",
+    width: 80,
+    align: "center",
+  },
+  {
+    title: "状态",
+    dataIndex: "status",
+    key: "status",
+    width: 70,
+    align: "center",
+    customRender: ({ text }) => {
+      return text === 1
+          ? "提现成功"
+          : text === 2
+              ? "提现错误"
+              : "等待到账";
     },
-    {
-      title: '提现账户',
-      key: 'account',
-      width: 120,
-      ellipsis: {
-        tooltip: true
-      }
-    },
-    {
-      title: '提现金额',
-      key: 'money',
-      width: 80,
-      align: 'center'
-    },
-    {
-      title: '状态',
-      key: 'status',
-      width: 70,
-      align: 'center',
-      render (row) {
-        return h(
-            NTag,
-            {
-              size: 'small',
-              type: row.status == 1 ? 'success' : row.status == 2 ? 'error' : 'warning',
-              bordered: true
-            },
-            {
-              default: () => {
-                if (row.status == 1) {
-                  return '提现成功'
-                } else if (row.status == 2) {
-                  return '提现错误';
-                } else {
-                  return '等待到账';
-                }
-              }
-            }
-        )
-      }
-    },
-    {
-      title: '提现说明',
-      key: 'summary',
-      width: 100
-    },
-    {
-      title: '提现时间',
-      key: 'createTime',
-      width: 140,
-      align: 'center'
-    }
-  ]
-}
+  },
+  {
+    title: "提现说明",
+    dataIndex: "summary",
+    key: "summary",
+    width: 100,
+  },
+  {
+    title: "提现时间",
+    dataIndex: "createTime",
+    key: "createTime",
+    width: 140,
+    align: "center",
+  },
+];
 
 /**
- * 提交的附加内容
+ * 数据源和状态
  */
-const params = reactive<WithdrawRecordParam>({
-  page: 1,
-  limit: 5
+const dataSource = ref<WithdrawRecord[]>([]);
+const loading = ref(false);
+const pagination = reactive({
+  current: 1,
+  pageSize: 5,
+  total: 0,
 });
 
 /**
- * 充值数据显示
+ * 查询参数
  */
-const loadingRef = ref(true);
-const createData = ref<WithdrawRecord[]>([{}]);
-const paginationReactive = reactive({
+const params = reactive<WithdrawRecordParam>({
   page: 1,
-  pageCount: 1,
-  pageSize: 0
-})
+  limit: 5,
+});
 
+/**
+ * 查询数据
+ */
+const query = () => {
+  loading.value = true;
+  pageWithdrawRecords(params)
+      .then((res) => {
+        loading.value = false;
+        dataSource.value = res.list;
+        pagination.total = res.count;
+      })
+      .catch((err) => {
+        loading.value = false;
+        message.error("数据加载失败");
+      });
+};
+
+/**
+ * 表格分页、排序、筛选变化事件
+ */
+const handleTableChange = (paginationInfo) => {
+  params.page = paginationInfo.current;
+  params.limit = paginationInfo.pageSize;
+  pagination.current = paginationInfo.current;
+  query();
+};
+
+/**
+ * 初始化加载数据
+ */
 onMounted(() => {
-  nextTick(() => {
-    query(params);
-  })
-})
-
-/**
- * 查询订单数据
- * @param limit
- * @param page
- */
-const query = (params) => {
-  pageWithdrawRecords(params).then((res) => {
-    loadingRef.value = false;
-    paginationReactive.pageCount = Math.ceil(res.count / params.limit);
-    createData.value = res.list.map((mDate?: WithdrawRecord) => {
-      return {
-        ...mDate
-      }
-    })
-  })
-}
-
-/**
- * 点击分页查询
- * @param currentPage
- */
-const handlePageChange = (currentPage) => {
-  loadingRef.value = true;
-  params.page = currentPage;
-  paginationReactive.page = currentPage;
-  query(params);
-}
+  query();
+});
 </script>
 
 <style scoped lang="less">
-
+/* 相关样式 */
 </style>

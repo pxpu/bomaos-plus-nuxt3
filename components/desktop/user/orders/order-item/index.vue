@@ -51,15 +51,11 @@ const onPrompt = (value?: number) => {
       :content-style="{padding: '15px'}"
   >
     <template #header>
-      <div class="latest-activity-card__badge" v-if="data.status == 2 && data.shippingType == 1">等待发货</div>
+      <div class="latest-activity-card__badge" :class="data.status == 2 ? 'error' : 'success'" v-if="[2, 3].includes(data.status as number) && data.shippingType == 1">
+        {{ data.status == 2 ? '等待发货' : '发货成功' }}
+      </div>
       <div class="bomaos-order-header">
-        <n-image
-            width="50"
-            height="50"
-            object-fit="cover"
-            :src="data.coverImage"
-            style="border-radius: 3px; display: block;"
-        />
+        <a-avatar shape="square" :size="50" :src="data.coverImage"/>
         <div class="title">
           <p class="g-name">
             <nuxt-link :to="'/product/' + data.uniqueLink" style="color: #222;">
@@ -68,7 +64,12 @@ const onPrompt = (value?: number) => {
               </n-ellipsis>
             </nuxt-link>
           </p>
-          <div class="van-cell__label" style="margin-top: 5px">
+          <div class="number" style="margin-top: 5px">
+            <n-space :size="0" style="align-items: flex-end;">
+              数量: x{{ data.number }} <span v-if="data.categoryName">, {{ data.categoryName }}</span>
+            </n-space>
+          </div>
+          <div class="van-cell__label" style="margin-top: 8px">
             <n-space :size="0" style="align-items: flex-end;">
               <div class="action">
                 <n-tag
@@ -161,8 +162,15 @@ const onPrompt = (value?: number) => {
     justify-content: space-between;
 
     .g-name {
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.2;
+      font-weight: 400;
+
+    }
+
+    .number {
+      font-size: 13px;
+      color: #707070;
       font-weight: 400;
     }
 
@@ -240,7 +248,6 @@ const onPrompt = (value?: number) => {
   right: -3.5px;
   top: -4px;
   height: 26px;
-  background: linear-gradient(to right, rgb(255 59 59) 0%, rgba(255, 103, 128, 0.88) 100%);
   border-radius: 0 5px 0 5px;
   font-weight: 500;
   font-size: 12px;
@@ -250,17 +257,31 @@ const onPrompt = (value?: number) => {
   padding: 4px 10px;
   display: flex;
   align-items: center;
-  z-index: 2;
+}
 
-  &:before {
-    content: "";
-    width: 14px;
-    height: 26px;
-    position: absolute;
-    background-size: auto 100%;
-    top: 0;
-    left: -8px;
-    background-image: url(https://cloudcache.tencent-cloud.cn/qcloud/ui/activity-v2/build/LatestActivity/images/badge-corner.svg);
-  }
+.latest-activity-card__badge:before {
+  content: "";
+  width: 14px;
+  height: 26px;
+  position: absolute;
+  background-size: auto 100%;
+  top: 0;
+  left: -8px;
+}
+
+.latest-activity-card__badge.error {
+  background: linear-gradient(to right, rgb(255 59 59) 0%, rgba(255, 103, 128, 0.88) 100%);
+}
+
+.latest-activity-card__badge.success {
+  background: linear-gradient(to right, #409EFF 0%, rgba(0, 185, 107, 0.88) 100%);
+}
+
+.latest-activity-card__badge.error:before {
+  background-image: url(/assets/images/user/badge-corner.svg);
+}
+
+.latest-activity-card__badge.success:before {
+  background-image: url(/assets/images/user/badge-success.svg);
 }
 </style>

@@ -4,8 +4,8 @@ import type {Product} from "~/api/product/product/model";
 
 const hotProductList = ref<Product[]>([]);
 
-getHotPosts().then((d) => {
-  hotProductList.value = d;
+await useAsyncData("read_hot_product", async () => getHotPosts()).then((d) => {
+  hotProductList.value = d.data.value;
 })
 </script>
 

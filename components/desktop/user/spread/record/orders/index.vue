@@ -1,118 +1,116 @@
 <template>
-  <n-data-table
-      :remote="true"
-      size="large"
-      ref="table"
-      :columns="createColumns()"
-      :data="createData"
-      :loading="loadingRef"
-      :pagination="paginationReactive"
-      @update:page="handlePageChange"
+  <a-table
+      :columns="columns"
+      :data-source="dataSource"
+      :loading="loading"
+      :pagination="pagination"
+      :bordered="true"
+      @change="handleTableChange"
+      row-key="id"
   />
 </template>
 
 <script setup lang="ts">
-import {reactive, ref} from "vue";
-import {type DataTableColumns} from "naive-ui";
-import type {RebateRecord, RebateRecordParam} from "@/api/member/rebate-record/model";
-import {pageRebateRecords} from "@/api/member/rebate-record";
+import { reactive, ref, onMounted } from "vue";
+import { message } from "ant-design-vue";
+import type { RebateRecord, RebateRecordParam } from "@/api/member/rebate-record/model";
+import { pageRebateRecords } from "@/api/member/rebate-record";
 
 /**
- * 支出记录 Columns
+ * 表格列配置
  */
-const createColumns = (): DataTableColumns<RebateRecord> => {
-  return [
-    {
-      title: '商品名称',
-      key: 'productName',
-      width: 150,
-      ellipsis: {
-        tooltip: true
-      }
-    },
-    {
-      title: '用户昵称',
-      key: 'superiorNickName',
-      width: 100,
-      ellipsis: {
-        tooltip: true
-      }
-    },
-    {
-      title: '付款金额',
-      key: 'money',
-      width: 80,
-      align: 'center'
-    },
-    {
-      title: '佣金',
-      key: 'brokerage',
-      width: 70,
-      align: 'center'
-    },
-    {
-      title: '付款时间',
-      key: 'paymentTime',
-      width: 150,
-      align: 'center'
-    }
-  ]
-}
+const columns = [
+  {
+    title: "商品名称",
+    dataIndex: "productName",
+    key: "productName",
+    width: 150,
+    ellipsis: true,
+  },
+  {
+    title: "用户昵称",
+    dataIndex: "superiorNickName",
+    key: "superiorNickName",
+    width: 100,
+    ellipsis: true,
+  },
+  {
+    title: "付款金额",
+    dataIndex: "money",
+    key: "money",
+    width: 80,
+    align: "center",
+  },
+  {
+    title: "佣金",
+    dataIndex: "brokerage",
+    key: "brokerage",
+    width: 70,
+    align: "center",
+  },
+  {
+    title: "付款时间",
+    dataIndex: "paymentTime",
+    key: "paymentTime",
+    width: 150,
+    align: "center",
+  },
+];
 
 /**
- * 提交的附加内容
+ * 数据源和状态
  */
-const params = reactive<RebateRecordParam>({
-  page: 1,
-  limit: 5
+const dataSource = ref<RebateRecord[]>([]);
+const loading = ref(false);
+const pagination = reactive({
+  current: 1,
+  pageSize: 5,
+  total: 0,
 });
 
 /**
- * 充值数据显示
+ * 查询参数
  */
-const loadingRef = ref(true);
-const createData = ref<RebateRecord[]>([{}]);
-const paginationReactive = reactive({
+const params = reactive<RebateRecordParam>({
   page: 1,
-  pageCount: 1,
-  pageSize: 0
-})
+  limit: 5,
+});
 
+/**
+ * 查询数据
+ */
+const query = () => {
+  loading.value = true;
+  pageRebateRecords(params)
+      .then((res) => {
+        loading.value = false;
+        dataSource.value = res.list;
+        pagination.total = res.count;
+      })
+      .catch((err) => {
+        loading.value = false;
+        message.error("数据加载失败");
+      });
+};
+
+/**
+ * 表格分页、排序、筛选变化事件
+ */
+const handleTableChange = (paginationInfo) => {
+  params.page = paginationInfo.current;
+  params.limit = paginationInfo.pageSize;
+  pagination.current = paginationInfo.current;
+  query();
+};
+
+/**
+ * 初始化加载数据
+ */
 onMounted(() => {
-  nextTick(() => {
-    query(params);
-  })
-})
-
-/**
- * 查询订单数据
- * @param limit
- * @param page
- */
-const query = (params) => {
-  pageRebateRecords(params).then((res) => {
-    loadingRef.value = false;
-    paginationReactive.pageCount = Math.ceil(res.count / params.limit);
-    createData.value = res.list.map((mDate?: RebateRecord) => {
-      return {
-        ...mDate
-      }
-    })
-  })
-}
-
-/**
- * 点击分页查询
- * @param currentPage
- */
-const handlePageChange = (currentPage) => {
-  loadingRef.value = true;
-  params.page = currentPage;
-  paginationReactive.page = currentPage;
-  query(params);
-}
+  query();
+});
 </script>
 
 <style scoped lang="less">
-
+/* 样式部分可按需调整 */
 </style>

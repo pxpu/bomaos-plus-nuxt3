@@ -34,14 +34,17 @@ const paymentList = ref<PayConfig[]>([]);
 /**
  * 获取支付渠道列表
  */
+const excludedDrivers = ["balance"];
 await useAsyncData("read_pay_config", async () => listPayConfigs()).then((d) => {
   paymentList.value = d.data.value.filter((config) => {
+    const isNotExcluded = !excludedDrivers.includes(config.driver);
+
     if ($isMobile() || $isTablet()) {
-      return config.isMobile === 1; // 过滤支持移动端的配置
+      return isNotExcluded && config.isMobile === 1;
     } else if ($isDesktop()) {
-      return config.isDesktop === 1; // 过滤支持电脑端的配置
+      return isNotExcluded && config.isDesktop === 1;
     }
-    return false; // 如果设备类型不明确，不显示任何配置
+    return false;
   });
 })
 

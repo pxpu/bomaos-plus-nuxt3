@@ -6,9 +6,6 @@ import {useSettingStore} from "~/store/useSettingStore";
 
 const setting = useSettingStore().setting as StoreSetting;
 
-// 加载状态
-const isLoading = ref(true);
-
 // 分类与商品数据
 const classifyList = ref<ClassifyDto[]>([]);
 // 激活项
@@ -17,13 +14,12 @@ const currentItem = ref<number>();
 /**
  * 查询商品
  */
-listClassifyDtos().then((d) => {
-  classifyList.value = d as ClassifyDto[];
+await useAsyncData("read_classify_list", async () => listClassifyDtos()).then((d) => {
+  classifyList.value = d.data.value as ClassifyDto[];
   if (classifyList.value.length > 0) {
     // 设置初始的激活项
     currentItem.value = classifyList.value[0].classifyId;
   }
-  isLoading.value = false;
 });
 
 const checkCurrentItem = () => {
@@ -87,8 +83,7 @@ useHead({
 
 <template>
   <div class="container">
-    <desktop-common-loading v-if="isLoading"/>
-    <div v-else style="margin: 15px 0; min-height: calc(100vh - 432px)">
+    <div style="margin: 15px 0; min-height: calc(100vh - 432px)">
       <div style="margin-bottom: 15px">
         <n-card :bordered="false" :content-style="{padding: '20px'}">
           <common-view-md :content="setting.placard as string" />

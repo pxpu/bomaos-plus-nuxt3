@@ -29,6 +29,13 @@ export default defineNuxtConfig({
     }
   },
 
+  // 其他配置...
+  nitro: {
+    devServer: {
+      port: 4000, // 将端口设置为 4000（或其他自定义端口）
+    },
+  },
+
   routeRules: {
     // Redirects legacy urls
     '/user': { redirect: '/user/orders' }

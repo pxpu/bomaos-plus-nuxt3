@@ -105,7 +105,7 @@ useHead({
           :bar-width="20"
           :tabs-padding="20"
           animated
-          pane-style="padding: 20px;"
+          :pane-style="{ padding: '20px', width: 'auto' }"
       >
         <n-tab-pane name="1" tab="订单统计">
           <!-- 订单统计 -->

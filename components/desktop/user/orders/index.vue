@@ -83,7 +83,7 @@ useHead({
         <div style="margin-top: 15px; display: flex; align-items: center; justify-content: space-between;">
           <n-pagination
               v-model:page="orderParams.page"
-              :page-count="(total / orderParams.limit).toFixed(0)"
+              :page-count="Math.ceil(total / orderParams.limit)"
               :page-sizes="[orderParams.limit]"
               simple
               @updatePage="onPageSize"
