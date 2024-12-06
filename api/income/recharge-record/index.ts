@@ -1,13 +1,13 @@
 import type {PaymentResult, RechargeParam, RechargeRecord, RechargeRecordParam} from "./model";
 import {hash} from "ohash";
 import type {PageResult} from "~/api";
-import fetchRequest from "~/composables/fetchRequest";
+import useFetchRequest from "~/composables/useFetchRequest";
 
 /**
  * 分页查询订单
  */
 export async function pageRechargeRecords(params: RechargeRecordParam) {
-    const res = await fetchRequest.get<PageResult<RechargeRecord>>(
+    const res = await useFetchRequest.get<PageResult<RechargeRecord>>(
         '/income/recharge-record/page',
         { ...params }
     );

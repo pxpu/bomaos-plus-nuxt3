@@ -103,10 +103,9 @@ const onSubmit = () => {
         submitLoading.value = false;
         switch (d.paymentType) {
           case 'balance':
-            message.success('使用余额支付成功！');
-            setTimeout(() => {
-              navigateTo('/user/orders')
-            }, 1500);
+            memberStore.fetchMemberInfo().finally(() => {
+              message.success('使用余额支付成功！');
+            })
             break;
           default:
             message.success('订单创建完成、正在前往支付');
@@ -176,7 +175,6 @@ const onSubmit = () => {
               v-for="payment in paymentList"
               :key="payment.id"
           >
-
             <common-check-item
                 :checked="paymentActiveType == payment.id"
                 :on-toggle="() => onSwitchPayment(payment)"

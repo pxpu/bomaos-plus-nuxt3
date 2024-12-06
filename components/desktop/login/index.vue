@@ -98,11 +98,12 @@ const submit = () => {
       const hide = messageLoading('正在登录中...', 0);
       login(form)
           .then((msg) => {
-            hide();
-            message.success(msg);
-            loading.value = false;
-            memberStore.fetchMemberInfo();
-            goHome();
+            memberStore.fetchMemberInfo().finally(() => {
+              hide();
+              message.success(msg);
+              loading.value = false;
+              goHome();
+            })
           })
           .catch((e) => {
             hide();

@@ -3,6 +3,8 @@ import type {PaymentResult} from "~/api/income/orders/model";
 import {getNameAndColor} from "~/utils/common-util";
 import type {AgentPackage} from "~/api/marketing/agent-package/model";
 import {checkOrder} from "~/api/income/orders";
+import {useMemberStore} from "~/store/useMemberStore";
+const memberStore = useMemberStore();
 
 const emit = defineEmits<{
   (e: 'done'): void;
@@ -21,13 +23,14 @@ const updateVisible = (value: boolean) => {
   emit('update:visible', value);
 };
 
-
 const intervalId = ref<number | null>(null); // 用于存储定时器 ID
 
 const checkOrderPeriodically = async (orderId: number) => {
   checkOrder(orderId).then((d) => {
-    message.success(d)
-    navigateTo('/user/order')
+    memberStore.fetchMemberInfo().finally(() => {
+      message.success(d)
+      navigateTo('/user/order')
+    })
   }).catch((d) => {
     console.log(d.message)
   })
