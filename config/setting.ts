@@ -16,7 +16,7 @@ export const BLACK_LIST: string[] = [
     '/user/orders',
     '/user/spread',
     '/user/wallet',
-    '/user/join_agent'
+    '/user/join-agent'
 ];
 
 // 不需要携带Token的API接口

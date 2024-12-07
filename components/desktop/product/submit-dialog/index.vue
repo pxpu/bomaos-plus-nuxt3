@@ -28,7 +28,7 @@ const intervalId = ref<number | null>(null); // 用于存储定时器 ID
 const checkOrderPeriodically = async (orderId: number) => {
   checkOrder(orderId).then((d) => {
     message.success(d)
-    navigateTo('/user/order')
+    navigateTo('/user/orders')
   }).catch((d) => {
     console.log(d.message)
   })
