@@ -78,11 +78,9 @@
         <div class="link-box">
           <div class="container beian">
             <n-space justify="center">
-              <span>Copyright © 2024 波妞杂货铺</span>
+              <span>Copyright © 2024 波猫杂货铺</span>
               <n-divider vertical />
-              <a class="beian-url" href="/assets/license/businesslicence.jpg" target="_blank">苏州XXXXXXXX有限公司</a>
-              <n-divider vertical />
-              <a class="beian-url" href="https://beian.miit.gov.cn/" target="_blank">营业执照: 苏ICP备2023XXXXXX号-1</a>
+              <a class="beian-url">bomaos.com</a>
             </n-space>
           </div>
         </div>

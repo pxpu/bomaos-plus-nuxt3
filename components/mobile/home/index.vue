@@ -51,85 +51,93 @@ useHead({
       <common-view-md :content="setting.placard as string" />
     </div>
     <n-spin :show="isLoading">
-      <template v-for="item in classifyList" :key="item.classifyId">
-        <n-card
-            :id="item.classifyId"
-            :title="item.name"
-            :bordered="false"
-            :segmented="{
-                    content: true,
-                    footer: 'soft'
-                  }"
-            :header-style="{padding: '13px 20px'}"
-            :content-style="{padding: 0}"
-        >
-          <template #header-extra>
-            <n-tag :bordered="true" size="small" type="success">
-              {{ item.productCount }} 个商品
-            </n-tag>
-          </template>
-          <nuxt-link
-              class="van-cell clickable"
-              :style="{padding: '15px'}"
-              v-for="product in item.products"
-              :key="product.productId"
-              :to="'/product/' + product.uniqueLink"
+
+      <div v-if="classifyList.length >= 1">
+        <template v-for="item in classifyList" :key="item.classifyId">
+          <n-card
+              :id="item.classifyId"
+              :title="item.name"
+              :bordered="false"
+              :segmented="{
+                      content: true,
+                      footer: 'soft'
+                    }"
+              :header-style="{padding: '13px 20px'}"
+              :content-style="{padding: 0}"
           >
-            <div style="margin-right: 15px; display: inherit;">
-              <van-image
-                  :width="50"
-                  :height="50"
-                  round
-                  fit="cover"
-                  style="border-radius: 5px; background-color: rgba(0, 0, 0, 0.05); display: block;"
-                  :src="product.coverImage as string"
-                  :lazy-load="true"
-              >
-                <template v-slot:loading>
-                  <van-loading type="spinner" size="40" />
-                </template>
-              </van-image>
-            </div>
-            <div class="van-cell__title">
-              <div class="title">
-                      <span :style="{ fontSize: '18px'}">
-                        <n-ellipsis :line-clamp="2" :tooltip="false">
-                          {{ product.name }}
-                        </n-ellipsis>
-                      </span>
-                <div style="margin-top: 2px; color: #999; line-height: 1.5;">
-                  <n-ellipsis :line-clamp="2" :tooltip="false">
-                    {{ product.description }}
-                  </n-ellipsis>
+            <template #header-extra>
+              <n-tag :bordered="true" size="small" type="success">
+                {{ item.productCount }} 个商品
+              </n-tag>
+            </template>
+            <nuxt-link
+                class="van-cell clickable"
+                :style="{padding: '15px'}"
+                v-for="product in item.products"
+                :key="product.productId"
+                :to="'/product/' + product.uniqueLink"
+            >
+              <div style="margin-right: 15px; display: inherit;">
+                <van-image
+                    :width="50"
+                    :height="50"
+                    round
+                    fit="cover"
+                    style="border-radius: 5px; background-color: rgba(0, 0, 0, 0.05); display: block;"
+                    :src="product.coverImage as string"
+                    :lazy-load="true"
+                >
+                  <template v-slot:loading>
+                    <van-loading type="spinner" size="40" />
+                  </template>
+                </van-image>
+              </div>
+              <div class="van-cell__title">
+                <div class="title">
+                        <span :style="{ fontSize: '18px'}">
+                          <n-ellipsis :line-clamp="2" :tooltip="false">
+                            {{ product.name }}
+                          </n-ellipsis>
+                        </span>
+                  <div style="margin-top: 2px; color: #999; line-height: 1.5;">
+                    <n-ellipsis :line-clamp="2" :tooltip="false">
+                      {{ product.description }}
+                    </n-ellipsis>
+                  </div>
+                </div>
+                <div class="van-cell__label" style="margin-top: 5px">
+                  <n-space :size="0" style="align-items: center;">
+                    <div class="action">
+                      <n-tag
+                          size="small"
+                          :bordered="false"
+                          :type="product.shippingType === 0 ? 'info' : 'error'"
+                      >
+                        {{ product.shippingType === 0 ? '自动发货' : '人工发货' }}
+                      </n-tag>
+                    </div>
+                    <n-divider vertical />
+                    <div class="action">
+                      <span>价格: </span>
+                      <span style="margin-left: 5px; color: var(--bomaos-color-danger); font-weight: bold">{{ product.price?.toFixed(2) }}</span>
+                    </div>
+                    <n-divider vertical />
+                    <div class="action">
+                      <span>库存: </span>
+                      <span style="margin-left: 5px; color: var(--bomaos-color-primary)">{{ product.unusedCount }}</span>
+                    </div>
+                  </n-space>
                 </div>
               </div>
-              <div class="van-cell__label" style="margin-top: 5px">
-                <n-space :size="0">
-                  <div class="action">
-                    <n-tag
-                        size="small"
-                        :bordered="false"
-                        :type="product.shippingType === 0 ? 'info' : 'error'"
-                    >
-                      {{ product.shippingType === 0 ? '自动发货' : '人工发货' }}
-                    </n-tag>
-                  </div>
-                  <n-divider vertical />
-                  <div class="action">
-                    <span>价格: </span>
-                    <span style="margin-left: 5px; color: var(--bomaos-color-danger); font-weight: bold">{{ product.price?.toFixed(2) }}</span>
-                  </div>
-                  <n-divider vertical />
-                  <div class="action">
-                    <span>库存: </span>
-                    <span style="margin-left: 5px; color: var(--bomaos-color-primary)">{{ product.unusedCount }}</span>
-                  </div>
-                </n-space>
-              </div>
-            </div>
-          </nuxt-link>
-        </n-card>
-      </template>
+            </nuxt-link>
+          </n-card>
+        </template>
+      </div>
+      <desktop-common-empty v-else description="暂无商品" height="350px" :is-button="false">
+        <template #icon>
+          <svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 1)" fill="none" fill-rule="evenodd"><ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse><g fill-rule="nonzero" stroke="#d9d9d9"><path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path><path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#fafafa"></path></g></g></svg>
+        </template>
+      </desktop-common-empty>
     </n-spin>
     <mobile-common-placard-dialog v-if="setting.isDialogMessage == 1" v-model:visible="visible" :content="setting.dialogMessage"/>
   </div>

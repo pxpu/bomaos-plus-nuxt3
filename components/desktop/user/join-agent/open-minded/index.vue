@@ -8,7 +8,9 @@ import {createAgentOrder} from "~/api/income/agent-orders";
 import type {AgentOrders} from "~/api/income/agent-orders/model";
 import type {PaymentResult} from "~/api/income/orders/model";
 import {messageLoading} from "~/utils/message-loading";
+import {useMemberStore} from "~/store/useMemberStore";
 
+const memberStore = useMemberStore()
 const { $isMobile, $isDesktop, $isTablet } = useNuxtApp();
 
 const agentPackageList = ref<AgentPackage[]>([]);

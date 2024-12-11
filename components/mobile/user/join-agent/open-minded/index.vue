@@ -7,7 +7,9 @@ import type {AgentPackage} from "~/api/marketing/agent-package/model";
 import {createAgentOrder} from "~/api/income/agent-orders";
 import type {AgentOrders} from "~/api/income/agent-orders/model";
 import type {PaymentResult} from "~/api/income/orders/model";
+import {useMemberStore} from "~/store/useMemberStore";
 
+const memberStore = useMemberStore()
 const { $isMobile, $isDesktop, $isTablet } = useNuxtApp();
 
 const agentPackageList = ref<AgentPackage[]>([]);
@@ -106,10 +108,9 @@ const onSubmit = () => {
         submitLoading.value = false;
         switch (d.paymentType) {
           case 'balance':
-            showNotify({ type: 'success', message: '使用余额支付成功！' });
-            setTimeout(() => {
-              navigateTo('/user/orders')
-            }, 1500);
+            memberStore.fetchMemberInfo().finally(() => {
+              showNotify({ type: 'success', message: '使用余额支付成功！' });
+            })
             break;
           default:
             showNotify({ type: 'success', message: '订单创建完成、正在前往支付' });

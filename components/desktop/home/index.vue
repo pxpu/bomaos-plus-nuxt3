@@ -61,17 +61,6 @@ onUnmounted(() => {
   window.removeEventListener('scroll', checkCurrentItem);
 });
 
-const visible = ref<boolean>(false);
-
-onMounted(() => {
-  const isDialogMessage = useCookie("isDialogMessage");
-  if (setting.isDialogMessage == 1 && !isDialogMessage.value) {
-    setTimeout(() => {
-      visible.value = true;
-    }, 500)
-  }
-})
-
 useHead({
   title: setting.websiteName + ' - ' + setting.description,
   meta: [
@@ -171,7 +160,7 @@ useHead({
                 </n-tag>
               </template>
               <nuxt-link
-                  class="van-cell clickable"
+                  class="bomaos-cell clickable"
                   :style="{padding: '20px'}"
                   v-for="product in item.products"
                   :key="product.productId"
@@ -192,7 +181,7 @@ useHead({
                     </template>
                   </van-image>
                 </div>
-                <div class="van-cell__title">
+                <div class="bomaos-cell__title">
                   <div class="title">
                   <span :style="{ fontSize: '18px'}">
                     <n-ellipsis :line-clamp="2" :tooltip="false">
@@ -205,8 +194,8 @@ useHead({
                       </n-ellipsis>
                     </div>
                   </div>
-                  <div class="van-cell__label" style="margin-top: 5px">
-                    <n-space :size="0">
+                  <div class="bomaos-cell__label" style="margin-top: 5px">
+                    <n-space :size="0" style="align-items: center;">
                       <div class="action">
                         <n-tag
                             size="small"
@@ -223,7 +212,7 @@ useHead({
                       </div>
                       <n-divider vertical />
                       <div class="action">
-                        <span>已出售: </span>
+                        <span>销量: </span>
                         <span style="margin-left: 5px; color: var(--bomaos-color-primary)">{{ product.usedCount }}</span>
                       </div>
                       <n-divider vertical />
@@ -245,7 +234,6 @@ useHead({
         </n-col>
       </n-row>
     </div>
-    <desktop-common-placard-dialog v-if="setting.isDialogMessage == 1" v-model:visible="visible" :content="setting.dialogMessage"/>
   </div>
 </template>
 
@@ -312,7 +300,7 @@ useHead({
   }
 }
 
-.van-cell {
+.bomaos-cell {
   position: relative;
   display: flex;
   box-sizing: border-box;
@@ -333,11 +321,11 @@ useHead({
   }
 }
 
-.van-cell--clickable {
+.bomaos-cell--clickable {
   cursor: pointer;
 }
 
-.van-cell__title, .van-cell__value {
+.bomaos-cell__title, .bomaos-cell__value {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -355,20 +343,20 @@ useHead({
   }
 }
 
-.van-cell__label {
-  margin-top: 0px;
+.bomaos-cell__label {
+  margin-top: 0;
   color: #707070;
   font-size: 12px;
   line-height: 18px;
 
   .action {
-    font-size: 13px;
+    font-size: 15px;
     display: flex;
     align-items: center;
   }
 }
 
-.van-cell__value {
+.bomaos-cell__value {
   position: relative;
   overflow: hidden;
   color: #707070;
@@ -386,13 +374,13 @@ useHead({
   -webkit-font-smoothing: antialiased;
 }
 
-.van-cell__left-icon, .van-cell__right-icon {
+.bomaos-cell__left-icon, .bomaos-cell__right-icon {
   height: 24px;
   font-size: 16px;
   line-height: 24px;
 }
 
-.van-cell__right-icon {
+.bomaos-cell__right-icon {
   margin-left: 4px;
   color: #969799;
 }

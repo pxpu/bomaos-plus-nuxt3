@@ -2,7 +2,7 @@
 import {useMemberStore} from "~/store/useMemberStore";
 import type {StoreSetting} from "~/api/settings/store-setting/model";
 import {useSettingStore} from "~/store/useSettingStore";
-
+const token = useCookie("token");
 const setting = useSettingStore().setting as StoreSetting;
 const { info } = storeToRefs(useMemberStore())
 </script>
@@ -16,28 +16,40 @@ const { info } = storeToRefs(useMemberStore())
       </nuxt-link>
       <div class="common-header--nav">
         <div class="nav-item">
-          <nuxt-link to="/" active-class="bomaos-this">全部商品</nuxt-link>
+          <nuxt-link to="/" active-class="bomaos-this">商品购买</nuxt-link>
         </div>
         <n-divider vertical />
         <div class="nav-item">
-          <nuxt-link to="/blog" active-class="bomaos-this">帮助文档</nuxt-link>
+          <nuxt-link to="/blog" active-class="bomaos-this">帮助中心</nuxt-link>
+        </div>
+        <n-divider vertical />
+        <div class="nav-item">
+          <nuxt-link to="/user/orders" active-class="bomaos-this">我的订单</nuxt-link>
         </div>
       </div>
       <div class="common-header--avatar" style="flex: 1 1 0%;">
-        <nuxt-link to="/user/orders" style="display: flex; align-items: center;">
-          <div class="mobile-img-border">
-            <!--                <a-avatar
-                                :size="34"
-                                v-if="info.avatar"
-                                :src="info.avatar"
-                            />-->
+        <nuxt-link v-if="!token && !info" to="/login" style="display: flex; align-items: center;">
+          <button class="login-button">
+            登录
+            <div class="login-button-inner">
+              <div class="login-button-line"></div>
+              注册
+            </div>
+          </button>
+        </nuxt-link>
+        <nuxt-link v-else to="/user/orders" style="display: flex; align-items: center;">
+          <button class="login-button">
+            <div class="login-button-inner">
+              个人中心
+              <div class="login-button-line"></div>
+            </div>
             <n-avatar
                 round
-                :size="34"
+                :size="23"
                 object-fit="cover"
                 :src="info?.avatar ? info?.avatar : '/assets/images/avatar.png'"
             />
-          </div>
+          </button>
         </nuxt-link>
       </div>
     </div>
@@ -45,6 +57,35 @@ const { info } = storeToRefs(useMemberStore())
 </template>
 
 <style scoped lang="less">
+.login-button {
+  background: rgba(30, 128, 255, 0.05);
+  border: 1px solid rgba(30, 128, 255, 0.3);
+  border-radius: 4px;
+  padding-bottom: 4.8px;
+  padding-left: 16px;
+  padding-right: 10px;
+  padding-top: 4.8px;
+  color: #007fff;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 400;
+  height: 35px;
+  overflow: hidden;
+  display: flex;
+  cursor: pointer;
+
+  .login-button-inner {
+    display: inline-flex;
+    align-items: center;
+
+    .login-button-line {
+      margin: 0 8px;
+      background-color: #abcdff;
+      height: 12px;
+      width: 1px;
+    }
+  }
+}
 header {
   background-color: var(--bomaos-background-color);
   border-bottom: var(--bomaos-border-color);

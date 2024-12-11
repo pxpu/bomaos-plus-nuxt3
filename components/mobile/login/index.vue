@@ -192,7 +192,7 @@ useHead({
 
 <style scoped lang="less">
 .bomaos-login-group {
-  min-height: calc(100vh - 165px);
+  min-height: calc(100vh - 226px);
   padding: 30px;
   position: relative;
   margin: 15px;

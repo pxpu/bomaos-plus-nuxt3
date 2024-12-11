@@ -335,7 +335,7 @@ useHead({
       return '404'
     }
   }),
-  titleTemplate: (title) => `${title} - 波妞杂货铺`,
+  titleTemplate: (title) => `${title} - 波猫杂货铺`,
   meta: [
     { name: 'Keywords', content: computed(() => {
         if (product.value.productId) {
@@ -405,7 +405,7 @@ useHead({
                           </p>
                         </div>
                         <div class="van-cell__label" style="margin-top: 5px">
-                          <n-space :size="0">
+                          <n-space :size="0" style="align-items: center;">
                             <div class="action">
                               <n-tag
                                   size="small"
@@ -714,7 +714,7 @@ useHead({
   line-height: 18px;
 
   .action {
-    font-size: 13px;
+    font-size: 14px;
     display: flex;
     align-items: center;
   }

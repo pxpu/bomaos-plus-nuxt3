@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { NConfigProvider, lightTheme, zhCN, dateZhCN } from 'naive-ui';
+import {useSettingStore} from "~/store/useSettingStore";
+import type {StoreSetting} from "~/api/settings/store-setting/model";
+const setting = useSettingStore().setting as StoreSetting;
+const route = useRoute();
 
 /**
  * js 文件下使用这个做类型提示
@@ -26,6 +30,15 @@ const themeOverrides = {
   }
 }
 
+const visible = ref<boolean>(false);
+
+onMounted(() => {
+  if (setting.isDialogMessage == 1 && route.fullPath === '/') {
+    setTimeout(() => {
+      visible.value = true;
+    }, 500)
+  }
+})
 </script>
 
 <template>
@@ -52,6 +65,7 @@ const themeOverrides = {
             <footer>
               <desktop-common-footer />
             </footer>
+            <desktop-common-placard-dialog v-if="setting.isDialogMessage == 1" v-model:visible="visible" :content="setting.dialogMessage"/>
           </a-config-provider>
         </a-extract-style>
       </n-message-provider>

@@ -371,8 +371,8 @@ useHead({
       >
         <template #header>
           <div class="bomaos-product-box" style="margin: 20px; font-weight: normal;">
-            <n-row gutter="15">
-              <n-col :span="7">
+            <a-row gutter="15">
+              <a-col :span="7">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                   <div class="square-wrapper">
                     <n-image
@@ -384,18 +384,10 @@ useHead({
                         class="square-image"
                     />
                   </div>
-                  <n-tag
-                      style="margin-top: 10px"
-                      size="small"
-                      :bordered="false"
-                      :type="product.categoryEnabled == 0 ? (product.shippingType === 0 ? 'info' : 'error') : (category?.shippingType === 0 ? 'info' : 'error')"
-                  >
-                    {{ product.categoryEnabled == 0 ? (product.shippingType === 0 ? '自动发货' : '人工发货') : (category?.shippingType === 0 ? '自动发货' : '人工发货') }}
-                  </n-tag>
                 </div>
-              </n-col>
-              <n-col :span="17">
-                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+              </a-col>
+              <a-col :span="17">
+                <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
                   <div class="bomaos-product-title">
                     <p class="g-name">{{ product.name }}</p>
                     <p class="g-desc">
@@ -405,7 +397,15 @@ useHead({
                     </p>
                   </div>
                   <div class="van-cell__label">
-                    <n-space :size="0">
+                    <n-space :size="0" style="align-items: center;">
+                      <n-tag
+                          size="small"
+                          :bordered="false"
+                          :type="product.categoryEnabled == 0 ? (product.shippingType === 0 ? 'info' : 'error') : (category?.shippingType === 0 ? 'info' : 'error')"
+                      >
+                        {{ product.categoryEnabled == 0 ? (product.shippingType === 0 ? '自动发货' : '人工发货') : (category?.shippingType === 0 ? '自动发货' : '人工发货') }}
+                      </n-tag>
+                      <n-divider vertical />
                       <div class="action">
                         <span>已出售: </span>
                         <span style="margin-left: 5px; color: var(--bomaos-color-primary)">
@@ -422,8 +422,8 @@ useHead({
                     </n-space>
                   </div>
                 </div>
-              </n-col>
-            </n-row>
+              </a-col>
+            </a-row>
           </div>
         </template>
         <n-alert :show-icon="false" style="margin-bottom: 20px">

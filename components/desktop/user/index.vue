@@ -103,8 +103,9 @@ const onLogout = () => {
                 </div>
               </n-badge>
             </div>
-            <div style="margin-top: 20px; font-size: 16px; display: flex; align-items: center; justify-content: center;">
-              {{ info?.nickName }}
+            <div style="margin-top: 20px; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+              <p style="font-weight: bold">{{ info?.nickName }}</p>
+              <p style="color: #666">{{ info?.email }}</p>
             </div>
             <n-divider style="margin-bottom: 0px"/>
             <nuxt-link class="nav-item" to="/user/orders" active-class="active">

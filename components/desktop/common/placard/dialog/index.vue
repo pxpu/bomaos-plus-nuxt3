@@ -12,10 +12,6 @@ const props = defineProps<{
 
 /* 更新visible */
 const updateVisible = (value: boolean) => {
-  const isDialogMessage = useCookie("isDialogMessage", {
-    maxAge: 60 * 60 * 24 * 7
-  })
-  isDialogMessage.value = 'true';
   emit('update:visible', value);
 };
 </script>
@@ -38,9 +34,31 @@ const updateVisible = (value: boolean) => {
       <n-scrollbar style="max-height: 350px">
         <common-view-md :content="content as string" />
       </n-scrollbar>
+      <van-divider style="margin-bottom: 20px"/>
+      <div class="bomaos-row">
+        <n-button
+            block
+            size="large"
+            type="primary"
+            style="flex-shrink: inherit"
+            @click="updateVisible(false)"
+        >
+          我已查看知晓
+        </n-button>
+      </div>
     </div>
   </n-modal>
 </template>
 
 <style scoped lang="less">
+.bomaos-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+
+  .bomaos-col {
+    display: block;
+  }
+}
 </style>

@@ -75,7 +75,7 @@ const handleClick = () => {
               <n-layout
                   ref="contentRef"
                   position="absolute"
-                  style="top: 65px; bottom: 70px; background-color: #f7f7f7"
+                  style="top: 66px; bottom: 70px; background-color: #f7f7f7"
                   :native-scrollbar="true"
               >
                 <nuxt-page/>
