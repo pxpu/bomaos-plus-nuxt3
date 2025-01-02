@@ -335,7 +335,7 @@ useHead({
       return '404'
     }
   }),
-  titleTemplate: (title) => `${title} - 波猫杂货铺`,
+  titleTemplate: (title) => `${title} - 悠米商城`,
   meta: [
     { name: 'Keywords', content: computed(() => {
         if (product.value.productId) {
@@ -346,7 +346,7 @@ useHead({
       })},
     { name: 'description', content: computed(() => {
         if (product.value.productId) {
-          return product.value.description ?? '致力于分享国内最全的账号销售平台'
+          return product.value.description ?? '悠米商城，为全球用户提供谷歌、苹果、亚马逊等礼品卡购买服务，游戏点卡充值、steam充值、xbox充值等优惠，7*24小时为您提供满意的交易。'
         } else {
           return '404'
         }
@@ -426,7 +426,7 @@ useHead({
                             <div class="action">
                               <span>库存: </span>
                               <span style="margin-left: 5px; color: var(--bomaos-color-primary)">
-                                {{  product.categoryEnabled == 0 ? (product.unusedCount == 0 ? '库存不足' : product.unusedCount) : (category?.unusedCount == 0 ? '库存不足' : category?.unusedCount) }}
+                                {{  product.categoryEnabled == 0 ? (product.unusedCount == 0 ? '缺货中~请联系客服！' : product.unusedCount) : (category?.unusedCount == 0 ? '缺货中~请联系客服！' : category?.unusedCount) }}
                               </span>
                             </div>
                           </n-space>
@@ -516,6 +516,7 @@ useHead({
                   content: true,
                   footer: 'soft'
                 }"
+                :style="{ marginBottom: '15px' }"
                 :header-style="{padding: '0px'}"
                 :content-style="{padding: '20px'}"
             >
@@ -638,6 +639,7 @@ useHead({
                 </div>
               </template>
             </n-card>
+            <desktop-common-hot-post />
           </n-col>
         </n-row>
       </div>
