@@ -8,7 +8,7 @@ const setting = useSettingStore().setting as StoreSetting;
 const { info } = storeToRefs(useMemberStore());
 
 useHead({
-  title: '我的会员 - ' + setting.description,
+  title: '我的会员 - ' + setting.websiteName,
   meta: [
     { name: 'Keywords', content: setting.keywords },
     { name: 'description', content: setting.description },
