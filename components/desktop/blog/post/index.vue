@@ -75,7 +75,7 @@ useHead({
       })},
     { name: 'description', content: computed(() => {
         if (article.value.id) {
-          return article.value.summary ?? '悠米官网，为全球用户提供谷歌、苹果、亚马逊等礼品卡购买服务，游戏点卡充值、steam充值、xbox充值等优惠，7*24小时为您提供满意的交易。'
+          return article.value.summary ?? '悠米商城，为全球用户提供谷歌、苹果、亚马逊等礼品卡购买服务，游戏点卡充值、steam充值、xbox充值等优惠，7*24小时为您提供满意的交易。'
         } else {
           return '404'
         }
