@@ -409,7 +409,7 @@ useHead({
                       <div class="action">
                         <span>库存: </span>
                         <span style="margin-left: 5px; color: var(--bomaos-color-primary)">
-                                {{ product.categoryEnabled == 0 ? (product.unusedCount == 0 ? '不足' : product.unusedCount) : (category?.unusedCount == 0 ? '不足' : category?.unusedCount) }}
+                                {{ product.categoryEnabled == 0 ? (product.unusedCount == 0 ? '缺货中~请联系客服！' : product.unusedCount) : (category?.unusedCount == 0 ? '缺货中~请联系客服！' : category?.unusedCount) }}
                               </span>
                       </div>
                     </n-space>
