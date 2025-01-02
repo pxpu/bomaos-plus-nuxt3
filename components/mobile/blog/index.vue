@@ -14,7 +14,7 @@ await useAsyncData("read_article", async () => listArticles()).then((d) => {
 })
 
 useHead({
-  title: '我的帮助 - ' + setting.description,
+  title: '帮助中心 - ' + setting.websiteName,
   meta: [
     { name: 'Keywords', content: setting.keywords },
     { name: 'description', content: setting.description },
