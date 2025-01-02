@@ -64,18 +64,18 @@ useHead({
       return '404'
     }
   }),
-  titleTemplate: (title) => `${title} - 鱼七博客`,
+  titleTemplate: (title) => `${title} - 悠米商城`,
   meta: [
     { name: 'Keywords', content: computed(() => {
         if (article.value.id && article.value.title) {
-          return '鱼七博客,' + article.value.title + ',教程,博客模板,个人博客,开源博客,vue3,nuxt3'
+          return '悠米商城,' + article.value.title + ',技术教程,跨境资讯,TikTok电商,Facebook推广'
         } else {
           return '404'
         }
       })},
     { name: 'description', content: computed(() => {
         if (article.value.id) {
-          return article.value.summary ?? '致力于分享前后端教程'
+          return article.value.summary ?? '悠米官网，为全球用户提供谷歌、苹果、亚马逊等礼品卡购买服务，游戏点卡充值、steam充值、xbox充值等优惠，7*24小时为您提供满意的交易。'
         } else {
           return '404'
         }
