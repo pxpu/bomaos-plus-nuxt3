@@ -24,7 +24,7 @@ const updateVisible = (value: boolean) => {
       :closable="true"
       :mask-closable="false"
       :block-scroll="false"
-      style="width: 350px; padding: 0; border-radius: 15px; line-height: 1.2; overflow: hidden;"
+      style="width: 500px; padding: 0; border-radius: 15px; line-height: 1.2; overflow: hidden;"
       :on-update:show="updateVisible"
       :z-index="1000"
   >
