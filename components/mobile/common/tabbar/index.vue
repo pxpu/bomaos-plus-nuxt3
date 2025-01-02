@@ -20,14 +20,14 @@ const active = ref(0);
       </div>
       <span>帮助</span>
     </nuxt-link>
-    <nuxt-link to="/user/join-agent" class="bomaos-tabbar-item" active-class="active">
+    <nuxt-link to="/user/spread" class="bomaos-tabbar-item" active-class="active">
       <div class="icon">
         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"  width="200" height="200">
           <path d="M896 265.6L805.333333 213.333333a42.666667 42.666667 0 0 0-42.666666 73.813334L832 327.253333v369.493334l-320 184.746666-320-184.746666V327.253333l320-184.746666 69.333333 40.106666a42.666667 42.666667 0 0 0 42.666667-74.026666L533.333333 56.32a42.666667 42.666667 0 0 0-42.666666 0L128 265.6a42.666667 42.666667 0 0 0-21.333333 37.12v418.56a42.666667 42.666667 0 0 0 21.333333 37.12l362.666667 209.28a42.666667 42.666667 0 0 0 42.666666 0l362.666667-209.28a42.666667 42.666667 0 0 0 21.333333-37.12V302.72a42.666667 42.666667 0 0 0-21.333333-37.12z" fill="currentColor"></path>
           <path d="M512 341.333333a170.666667 170.666667 0 1 0 170.666667 170.666667 170.666667 170.666667 0 0 0-170.666667-170.666667z m0 256a85.333333 85.333333 0 1 1 85.333333-85.333333 85.333333 85.333333 0 0 1-85.333333 85.333333z" fill="currentColor"></path>
         </svg>
       </div>
-      <span>会员</span>
+      <span>返利</span>
     </nuxt-link>
     <nuxt-link to="/user/orders" class="bomaos-tabbar-item" active-class="active">
       <div class="icon">
