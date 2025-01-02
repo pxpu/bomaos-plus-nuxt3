@@ -57,7 +57,7 @@ const openCheck = (value: OrdersDto) => {
 }
 
 useHead({
-  title: '我的订单 - ' + setting.description,
+  title: '我的订单 - ' + setting.websiteName,
   meta: [
     { name: 'Keywords', content: setting.keywords },
     { name: 'description', content: setting.description },
@@ -90,7 +90,7 @@ useHead({
               size="large"
           />
           <div>
-            我们将会定期清理订单
+            请妥善保管您的卡密信息，我们将会定期清理订单！
           </div>
         </div>
       </div>
