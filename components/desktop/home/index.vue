@@ -212,11 +212,6 @@ useHead({
                       </div>
                       <n-divider vertical />
                       <div class="action">
-                        <span>销量: </span>
-                        <span style="margin-left: 5px; color: var(--bomaos-color-primary)">{{ product.usedCount }}</span>
-                      </div>
-                      <n-divider vertical />
-                      <div class="action">
                         <span>库存: </span>
                         <span style="margin-left: 5px; color: var(--bomaos-color-primary)">{{ product.unusedCount }}</span>
                       </div>
