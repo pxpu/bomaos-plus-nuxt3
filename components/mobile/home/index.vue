@@ -118,11 +118,6 @@ useHead({
                     </div>
                     <n-divider vertical />
                     <div class="action">
-                      <span>价格: </span>
-                      <span style="margin-left: 5px; color: var(--bomaos-color-danger); font-weight: bold">{{ product.price?.toFixed(2) }}</span>
-                    </div>
-                    <n-divider vertical />
-                    <div class="action">
                       <span>库存: </span>
                       <span style="margin-left: 5px; color: var(--bomaos-color-primary)">{{ product.unusedCount }}</span>
                     </div>
