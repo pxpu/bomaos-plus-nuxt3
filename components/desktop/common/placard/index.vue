@@ -23,12 +23,10 @@ if (!setting) {
             <nuxt-link to="/login" active-class="bomaos-this">登陆/注册</nuxt-link>
           </div>
           <n-divider v-if="!token"  vertical style="height: 10px; background-color: rgb(108 108 108);"/>
-          <!--          <a-divider type="vertical" style="height: 10px; background-color: rgb(108 108 108);"/>-->
           <div class="bomaos-nav-item">
             <nuxt-link to="/user/orders" active-class="bomaos-this">我的订单</nuxt-link>
           </div>
           <n-divider vertical style="height: 10px; background-color: rgb(108 108 108);"/>
-<!--          <a-divider type="vertical" style="height: 10px; background-color: rgb(108 108 108);"/>-->
           <div class="bomaos-nav-item">
             <nuxt-link to="/blog" active-class="bomaos-this">帮助文档</nuxt-link>
           </div>
