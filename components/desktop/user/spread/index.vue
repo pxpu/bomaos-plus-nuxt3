@@ -39,7 +39,7 @@ const submitWithdrawal = ()  => {
 }
 
 useHead({
-  title: '邀请返利 - ' + setting.description,
+  title: '邀请返利 - ' + setting.websiteName,
   meta: [
     { name: 'Keywords', content: setting.keywords },
     { name: 'description', content: setting.description },
