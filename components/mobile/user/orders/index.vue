@@ -78,7 +78,7 @@ onMounted(() => {
 })
 
 useHead({
-  title: '我的订单 - ' + setting.description,
+  title: '我的订单 - ' + setting.websiteName,
   meta: [
     { name: 'Keywords', content: setting.keywords },
     { name: 'description', content: setting.description },
