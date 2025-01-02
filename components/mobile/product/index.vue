@@ -407,13 +407,6 @@ useHead({
                       </n-tag>
                       <n-divider vertical />
                       <div class="action">
-                        <span>已出售: </span>
-                        <span style="margin-left: 5px; color: var(--bomaos-color-primary)">
-                                {{ product.categoryEnabled == 0 ? product.usedCount : category?.usedCount}}
-                              </span>
-                      </div>
-                      <n-divider vertical />
-                      <div class="action">
                         <span>库存: </span>
                         <span style="margin-left: 5px; color: var(--bomaos-color-primary)">
                                 {{ product.categoryEnabled == 0 ? (product.unusedCount == 0 ? '不足' : product.unusedCount) : (category?.unusedCount == 0 ? '不足' : category?.unusedCount) }}
