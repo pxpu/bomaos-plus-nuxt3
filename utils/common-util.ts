@@ -32,10 +32,10 @@ export function getNameAndColor(type: string): TypeColorMapping {
         epay_alipay: {
             name: '支付宝',
             color: '#02A8F1',
-            icon: '/assets/images/payment/balance.svg'
+            icon: '/assets/images/payment/alipay.svg'
         },
-        xunhu_wxpay: {
-            name: '微信',
+        epay_wxpay: {
+            name: '微信支付',
             color: '#1fbe1f',
             icon: '/assets/images/payment/wechat.svg'
         },
