@@ -1,4 +1,20 @@
 <template>
+  <a href="https://t.me/uomiss" id="linkzalo" target="_blank" rel="noopener noreferrer">
+    <div class="fcta-zalo-vi-tri-nut">
+        <div id="fcta-zalo-tracking" class="fcta-zalo-nen-nut">
+            <div id="fcta-zalo-tracking" class="fcta-zalo-ben-trong-nut">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" xml:space="preserve">
+                    <path d="M19.2 4.4 2.9 10.7c-1.1.4-1.1 1.1-.2 1.3l4.1 1.3 1.6 4.8c.2.5.1.7.6.7.4 0 .6-.2.8-.4l2-2 4.2 3.1c.8.4 1.3.2 1.5-.7l2.8-13.1c.3-1.1-.4-1.7-1.1-1.3m-2.1 3-7.8 7.1-.3 3.3L7.4 13l9.2-5.8c.4-.3.8-.1.5.2"></path>
+                    <path style="fill:none;" d="M0 0h24v24H0z"></path>
+                </svg>
+            </div>
+            <div id="fcta-zalo-tracking" class="fcta-zalo-text">联系<br>客服</div>
+        </div>
+    </div>
+    <div id="fcta-zalo-tracking" class="fcta-zalo-mess">
+        <span id="fcta-zalo-tracking">联系Telegram</span>
+    </div>
+  </a>
   <div class="bomaos-footer">
     <div class="start-box">
       <div class="container">
@@ -24,7 +40,7 @@
         <n-row gutter="15">
           <n-col :span="6">
             <nav style="margin-right: 15px">
-              <div class="title">平台简介</div>
+              <div class="title">商城简介</div>
               <div class="turn" style="color: #666; line-height: 1.5;">
                 {{ setting.introduction }}
               </div>
@@ -34,9 +50,9 @@
             <nav>
               <div class="title">功能导航</div>
               <div class="turn" style="color: #666">
-                <nuxt-link to="/user/orders">我的订单</nuxt-link>
-                <nuxt-link to="/user/spread">邀请好友</nuxt-link>
-                <nuxt-link to="/blog">帮助文档</nuxt-link>
+                <nuxt-link to="https://2fa.uno" target="_blank">2FA工具箱</nuxt-link>
+                <nuxt-link to="/" target="_blank">GPT镜像站</nuxt-link>
+                <nuxt-link to="/" target="_blank">本站发布页</nuxt-link>
               </div>
             </nav>
           </n-col>
@@ -78,9 +94,7 @@
         <div class="link-box">
           <div class="container beian">
             <n-space justify="center">
-              <span>Copyright © 2024 波猫杂货铺</span>
-              <n-divider vertical />
-              <a class="beian-url">bomaos.com</a>
+              <span>Copyright © 2025 {{ setting.websiteName }}</span>
             </n-space>
           </div>
         </div>
@@ -240,5 +254,166 @@ nav .turn svg {
   margin-top: 5px;
   width: 100px;
   height: 100px;
+}
+
+div.fcta-zalo-mess {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+.fcta-zalo-vi-tri-nut:hover + div.fcta-zalo-mess {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@keyframes zoom {
+    0% {
+        opacity: 0;
+        transform: scale(.5);
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes lucidgenzalo {
+    0%, to {
+        transform: rotate(-25deg);
+    }
+    50% {
+        transform: rotate(25deg);
+    }
+}
+
+.jscroll-to-top {
+    bottom: 100px;
+}
+
+.fcta-zalo-ben-trong-nut svg path {
+    fill: #fff;
+}
+
+.fcta-zalo-vi-tri-nut {
+    bottom: 50px;
+    position: fixed;
+    right: 20px;
+    z-index: 999;
+}
+
+.fcta-zalo-nen-nut,
+div.fcta-zalo-mess {
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .06), 0 2px 32px rgba(0, 0, 0, .16);
+}
+
+.fcta-zalo-nen-nut {
+    background: #0068ff;
+    border-radius: 50%;
+    color: #fff;
+    height: 50px;
+    position: relative;
+    text-align: center;
+    width: 50px;
+}
+
+.fcta-zalo-nen-nut:after,
+.fcta-zalo-nen-nut:before {
+    animation: zoom 1.9s linear infinite;
+    background: #0068ff80;
+    border: 1px solid #0068ff;
+    border-radius: 50%;
+    bottom: -20px;
+    content: "";
+    left: -20px;
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    z-index: -1;
+}
+
+.fcta-zalo-nen-nut:after {
+    animation-delay: .4s;
+}
+
+.fcta-zalo-ben-trong-nut,
+.fcta-zalo-ben-trong-nut i {
+    transition: all 1s;
+}
+
+.fcta-zalo-ben-trong-nut {
+    bottom: 10px;
+    font-size: 25px;
+    height: 60%;
+    left: 10px;
+    opacity: 1;
+    position: absolute;
+    text-align: center;
+    width: 60%;
+}
+
+.fcta-zalo-ben-trong-nut i {
+    animation: lucidgenzalo 1s linear infinite;
+}
+
+.fcta-zalo-nen-nut:hover .fcta-zalo-ben-trong-nut,
+.fcta-zalo-text {
+    opacity: 0;
+}
+
+.fcta-zalo-nen-nut:hover i {
+    transform: scale(.5);
+    transition: all .5s ease-in;
+}
+
+.fcta-zalo-text a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.fcta-zalo-text {
+    font-size: 12px;
+    font-weight: 700;
+    left: 13px;
+    line-height: 1.5;
+    position: absolute;
+    text-transform: uppercase;
+    top: 8px;
+    transform: scaleX(-1);
+    transition: all .5s;
+}
+
+.fcta-zalo-nen-nut:hover .fcta-zalo-text {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+div.fcta-zalo-mess {
+    background: #fff;
+    border-radius: 50px 0 0 50px;
+    bottom: 55px;
+    color: #0068ff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 7px 25px 7px 15px;
+    position: fixed;
+    right: 58px;
+    z-index: 99;
+}
+
+div.fcta-zalo-mess span {
+    color: #0068ff !important;
+}
+
+span#fcta-zalo-tracking {
+    font-family: Roboto;
+    line-height: 1.5;
+}
+
+.fcta-zalo-text {
+    font-family: Roboto;
 }
 </style>
