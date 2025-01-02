@@ -123,7 +123,7 @@ const goHome = () => {
 };
 
 useHead({
-  title: '登陆或注册 - ' + setting.description,
+  title: '登陆或注册 - ' + setting.websiteName,
   meta: [
     { name: 'Keywords', content: setting.keywords },
     { name: 'description', content: setting.description },
