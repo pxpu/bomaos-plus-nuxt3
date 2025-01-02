@@ -77,7 +77,7 @@ const onPrompt = (value?: number) => {
                     :bordered="false"
                     :type="data.shippingType === 0 ? 'info' : 'error'"
                 >
-                  {{ data.shippingType === 0 ? '自动发货' : '手动发货' }}
+                  {{ data.shippingType === 0 ? '自动发货' : '人工发货' }}
                 </n-tag>
               </div>
               <n-divider vertical />
