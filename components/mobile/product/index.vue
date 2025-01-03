@@ -506,7 +506,7 @@ useHead({
           <n-form-item label="支付方式" path="paymentType" :show-feedback="false">
             <n-row :gutter="[10, 10]">
               <n-col
-                  :span="24"
+                  :span="12"
                   v-for="payment in paymentList"
                   :key="payment.id"
               >
